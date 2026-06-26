@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TastyKitchen — агрегатор рецептов</title>
+  <!-- Фавикон (SVG через data-URI) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23E67E22'/%3E%3Ccircle cx='50' cy='45' r='28' fill='%23FFFFFF' opacity='0.9'/%3E%3Cpath d='M35 35 L45 35 L45 55 L35 55 Z' fill='%23E67E22'/%3E%3Cpath d='M55 35 L65 35 L65 55 L55 55 Z' fill='%23E67E22'/%3E%3Cpath d='M42 30 L58 30 L50 20 Z' fill='%23E67E22'/%3E%3Ccircle cx='50' cy='42' r='6' fill='%23E67E22'/%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23E67E22'/%3E%3Ccircle cx='90' cy='80' r='50' fill='%23FFFFFF' opacity='0.9'/%3E%3Cpath d='M60 65 L80 65 L80 95 L60 95 Z' fill='%23E67E22'/%3E%3Cpath d='M100 65 L120 65 L120 95 L100 95 Z' fill='%23E67E22'/%3E%3Cpath d='M75 55 L105 55 L90 40 Z' fill='%23E67E22'/%3E%3Ccircle cx='90' cy='78' r='10' fill='%23E67E22'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --bg: #F8F4F0;
+      --card-bg: #FFFFFF;
+      --text: #2D1B0E;
+      --text-secondary: #6B5340;
+      --border: #E8DDD4;
+      --accent: #E67E22;
+      --accent-light: #F39C12;
+      --shadow: rgba(0,0,0,0.08);
+      --radius: 20px;
+      --transition: 0.3s cubic-bezier(.4,0,.2,1);
+      --font: 'Nunito Sans', system-ui, -apple-system, sans-serif;
+    }
+
+    [data-theme="dark"] {
+      --bg: #1A1410;
+      --card-bg: #2A221C;
+      --text: #F0E6D8;
+      --text-secondary: #A89080;
+      --border: #3D3228;
+      --shadow: rgba(0,0,0,0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      transition: background var(--transition), color var(--transition);
+      padding: 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0 20px;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+    .logo span { color: var(--text); }
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .search-box {
+      display: flex;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 4px 16px;
+      align-items: center;
+      transition: var(--transition);
+    }
+    .search-box:focus-within {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(230,126,34,0.2);
+    }
+    .search-box input {
+      border: none;
+      background: transparent;
+      padding: 10px 0;
+      font-size: 0.95rem;
+      width: 180px;
+      color: var(--text);
+      outline: none;
+    }
+    .search-box input::placeholder { color: var(--text-secondary); }
+    .search-box button {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      padding: 4px;
+    }
+    .theme-toggle {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+    .theme-toggle:hover {
+      border-color: var(--accent);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .filter-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 8px 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+    .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+    .filter-btn:hover {
+      border-color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      flex: 1;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 4px 16px var(--shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: default;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid var(--border);
+      position: relative;
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px var(--shadow);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #e0d6cc;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+      position: relative;
+      background-image: linear-gradient(135deg, var(--border) 0%, transparent 100%);
+    }
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s;
+    }
+    .card:hover .card-img img { transform: scale(1.02); }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .tag {
+      background: var(--bg);
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      padding: 2px 10px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+    .card-meta span { display: flex; align-items: center; gap: 4px; }
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background: var(--bg);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--accent-light);
+      transform: scale(0.97);
+    }
+    .btn-outline {
+      border-color: var(--border);
+      background: transparent;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-fav.active {
+      background: #E85454;
+      color: #fff;
+      border-color: #E85454;
+    }
+
+    .planner-widget {
+      margin-top: 32px;
+      padding: 20px;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .planner-widget h3 {
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+    .planner-days {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px,1fr));
+      gap: 12px;
+    }
+    .planner-day {
+      background: var(--bg);
+      padding: 10px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 0.9rem;
+      border: 1px solid var(--border);
+    }
+    .planner-day strong { display: block; font-size: 0.75rem; opacity: 0.7; }
+    .planner-day .meal { margin-top: 4px; color: var(--accent); font-weight: 600; }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      header { flex-direction: column; align-items: stretch; }
+      .search-box input { width: 100%; }
+      .grid { grid-template-columns: 1fr; }
+      .filters { justify-content: center; }
+      .planner-days { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 768px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 1024px) {
+      .grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .card-img .placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background: var(--border);
+      color: var(--text-secondary);
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Tasty<span>Kitchen</span></div>
+  <div class="header-controls">
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Поиск рецептов...">
+      <button id="searchBtn">🔍</button>
+    </div>
+    <button class="theme-toggle" id="themeToggle">🌙 Тёмная</button>
+  </div>
+</header>
+
+<!-- Фильтры -->
+<div class="filters" id="filterContainer">
+  <button class="filter-btn active" data-filter="all">Все</button>
+  <button class="filter-btn" data-filter="завтрак">Завтраки</button>
+  <button class="filter-btn" data-filter="обед">Обеды</button>
+  <button class="filter-btn" data-filter="ужин">Ужины</button>
+  <button class="filter-btn" data-filter="десерт">Десерты</button>
+  <button class="filter-btn" data-filter="диетическое">Диетическое</button>
+</div>
+
+<!-- Сетка рецептов -->
+<div class="grid" id="recipeGrid"></div>
+
+<!-- Планировщик (демо) -->
+<div class="planner-widget">
+  <h3>📅 План на неделю</h3>
+  <div class="planner-days" id="plannerDays">
+    <!-- заполняется JS -->
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ===== Данные рецептов =====
+    const recipes = [
+      { id: 1, title: 'Омлет с овощами', category: 'завтрак', time: 15, difficulty: 'легко', tags: ['завтрак', 'овощи'], rating: 4.8, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrIHq_VIcNRSnkjCqONzQMqNijTMn0uS2NOo7hD1boaA&s=10' },
+      { id: 2, title: 'Куриный суп с лапшой', category: 'обед', time: 45, difficulty: 'средне', tags: ['суп', 'курица'], rating: 4.5, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSVUidS19yJyyElTqd58Q_T-7feZM5aiDfw18jymcl_w&s=10' },
+      { id: 3, title: 'Стейк с картофелем', category: 'ужин', time: 30, difficulty: 'сложно', tags: ['мясо', 'ужин'], rating: 4.9, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPGuKO8rcxTfh8mVPSP4HQBlDY0Bq2N3cKPeZrS9smpA&s=10' },
+      { id: 4, title: 'Панкейки с ягодами', category: 'завтрак', time: 20, difficulty: 'легко', tags: ['десерт', 'завтрак'], rating: 4.7, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJKLDG5D5y4zuqooSbScGw8bPnAb4j2EPnOHhCJyYtcQ&s=10' },
+      { id: 5, title: 'Греческий салат', category: 'обед', time: 10, difficulty: 'легко', tags: ['салат', 'овощи'], rating: 4.3, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDdJN6-YNI94xCC7HoIw9SwS-0DbWAqzkwqXcXvbzi_Q&s=10' },
+      { id: 6, title: 'Лазанья', category: 'ужин', time: 60, difficulty: 'сложно', tags: ['паста', 'мясо'], rating: 4.6, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwERqrmw79Kom2PdcQgTEhBQAc_ielRNEkfcKLCgoPQA&s=10' },
+      { id: 7, title: 'Тирамису', category: 'десерт', time: 40, difficulty: 'средне', tags: ['десерт', 'кофе'], rating: 4.9, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4BVn2UFHzsfQiu8KTgiVptSGFrfrWXTAMiiWJUJJC6w&s=10' },
+      { id: 8, title: 'Овощное рагу', category: 'диетическое', time: 35, difficulty: 'средне', tags: ['диетическое', 'овощи'], rating: 4.2, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUnJlVNECZoWWI57kX6IUQKSkoMN6DAIvvGjEE386c6A&s=10' },
+    ];
+
+    // ===== Состояние =====
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let favorites = JSON.parse(localStorage.getItem('tasty_favorites')) || [];
+    let planner = JSON.parse(localStorage.getItem('tasty_planner')) || {};
+
+    // ===== DOM-ссылки =====
+    const grid = document.getElementById('recipeGrid');
+    const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const themeToggle = document.getElementById('themeToggle');
+    const plannerDays = document.getElementById('plannerDays');
+
+    // ===== Рендер карточек =====
+    function renderRecipes() {
+      let filtered = recipes.filter(r => {
+        const matchCategory = currentFilter === 'all' || r.category === currentFilter;
+        const matchSearch = r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            r.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
+        return matchCategory && matchSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-secondary); padding:40px;">🍽️ Рецептов не найдено. Попробуйте изменить фильтры.</p>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(r => {
+        const isFav = favorites.includes(r.id);
+        return `
+          <div class="card" data-id="${r.id}">
+            <div class="card-img">
+              <img src="${r.img}" alt="${r.title}" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=placeholder>🍳</div>';">
+            </div>
+            <div class="card-tags">
+              ${r.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+            <div class="card-title">${r.title}</div>
+            <div class="card-meta">
+              <span>⏱ ${r.time} мин</span>
+              <span>⭐ ${r.rating}</span>
+              <span>${r.difficulty}</span>
+            </div>
+            <div class="card-actions">
+              <button class="btn btn-primary btn-plan" data-id="${r.id}">📅 В план</button>
+              <button class="btn btn-outline btn-fav ${isFav ? 'active' : ''}" data-id="${r.id}">${isFav ? '❤️' : '🤍'}</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // ===== Обработчики для кнопок =====
+      document.querySelectorAll('.btn-plan').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const id = parseInt(this.dataset.id);
+          addToPlanner(id);
+        });
+      });
+      document.querySelectorAll('.btn-fav').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const id = parseInt(this.dataset.id);
+          toggleFavorite(id);
+        });
+      });
+    }
+
+    // ===== Избранное =====
+    function toggleFavorite(id) {
+      const idx = favorites.indexOf(id);
+      if (idx > -1) {
+        favorites.splice(idx, 1);
+      } else {
+        favorites.push(id);
+      }
+      localStorage.setItem('tasty_favorites', JSON.stringify(favorites));
+      renderRecipes();
+      renderPlanner();
+    }
+
+    // ===== Планировщик =====
+    function addToPlanner(id) {
+      const days = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+      // Просто добавляем в первый свободный день или в Пн
+      let targetDay = 'Пн';
+      for (let d of days) {
+        if (!planner[d]) { targetDay = d; break; }
+      }
+      if (!planner[targetDay]) planner[targetDay] = [];
+      const recipe = recipes.find(r => r.id === id);
+      if (recipe) {
+        planner[targetDay].push(recipe.title);
+        localStorage.setItem('tasty_planner', JSON.stringify(planner));
+        renderPlanner();
+        renderRecipes(); // обновить, чтобы показать, что добавили
+      }
+    }
+
+    function renderPlanner() {
+      const days = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+      let html = '';
+      days.forEach(d => {
+        const meals = planner[d] || [];
+        html += `
+          <div class="planner-day">
+            <strong>${d}</strong>
+            ${meals.length ? meals.map(m => `<div class="meal">${m}</div>`).join('') : '<div style="color:var(--text-secondary);font-size:0.8rem;">–</div>'}
+          </div>
+        `;
+      });
+      plannerDays.innerHTML = html;
+    }
+
+    // ===== Фильтры =====
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        currentFilter = this.dataset.filter;
+        renderRecipes();
+      });
+    });
+
+    // ===== Поиск =====
+    function performSearch() {
+      searchQuery = searchInput.value.trim();
+      renderRecipes();
+    }
+    searchBtn.addEventListener('click', performSearch);
+    searchInput.addEventListener('keyup', (e) => {
+      if (e.key === 'Enter') performSearch();
+    });
+
+    // ===== Тёмная тема =====
+    let darkTheme = localStorage.getItem('tasty_theme') === 'dark';
+    function applyTheme() {
+      document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light');
+      themeToggle.textContent = darkTheme ? '☀️ Светлая' : '🌙 Тёмная';
+      localStorage.setItem('tasty_theme', darkTheme ? 'dark' : 'light');
+    }
+    themeToggle.addEventListener('click', () => {
+      darkTheme = !darkTheme;
+      applyTheme();
+    });
+    applyTheme();
+
+    // ===== Инициализация =====
+    renderRecipes();
+    renderPlanner();
+
+    // ===== (опционально) очистка планировщика по клику на день =====
+    document.querySelectorAll('.planner-day').forEach(el => {
+      el.addEventListener('dblclick', function() {
+        const day = this.querySelector('strong')?.textContent;
+        if (day && planner[day]) {
+          delete planner[day];
+          localStorage.setItem('tasty_planner', JSON.stringify(planner));
+          renderPlanner();
+        }
+      });
+    });
+
+  })();
+</script>
+
+<!-- Подвал -->
+<footer style="margin-top:32px;padding:16px 0;border-top:1px solid var(--border);text-align:center;color:var(--text-secondary);font-size:0.85rem;">
+  TastyKitchen © 2026 — Готовьте с удовольствием!
+</footer>
+
+</body>
+</html>
