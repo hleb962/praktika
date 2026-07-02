@@ -32,11 +32,7 @@
       --modal-overlay: rgba(0,0,0,0.7);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: var(--font);
       background: var(--bg);
@@ -136,6 +132,14 @@
       background: var(--accent);
       color: #fff;
     }
+    .btn-success {
+      background: #2ECC8A;
+      color: #fff;
+    }
+    .btn-success:hover {
+      background: #27AE60;
+      transform: scale(0.97);
+    }
     .theme-toggle {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -149,9 +153,7 @@
       gap: 6px;
       transition: var(--transition);
     }
-    .theme-toggle:hover {
-      border-color: var(--accent);
-    }
+    .theme-toggle:hover { border-color: var(--accent); }
     .user-btn {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -165,12 +167,9 @@
       align-items: center;
       gap: 6px;
     }
-    .user-btn:hover {
-      border-color: var(--accent);
-    }
+    .user-btn:hover { border-color: var(--accent); }
     .user-btn .avatar {
-      width: 28px;
-      height: 28px;
+      width: 28px; height: 28px;
       border-radius: 50%;
       background: var(--accent);
       color: #fff;
@@ -194,14 +193,8 @@
       color: #fff;
       box-shadow: 0 4px 20px rgba(230,126,34,0.3);
     }
-    .banner h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-    }
-    .banner p {
-      opacity: 0.9;
-      font-size: 0.95rem;
-    }
+    .banner h2 { font-size: 1.3rem; font-weight: 700; }
+    .banner p { opacity: 0.9; font-size: 0.95rem; }
     .banner .btn-banner {
       background: #fff;
       color: #E67E22;
@@ -222,9 +215,10 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 24px;
+      margin-bottom: 16px;
       padding: 16px 0;
       border-bottom: 1px solid var(--border);
+      align-items: center;
     }
     .filter-btn {
       background: var(--card-bg);
@@ -241,8 +235,25 @@
       color: #fff;
       border-color: var(--accent);
     }
-    .filter-btn:hover {
-      border-color: var(--accent);
+    .filter-btn:hover { border-color: var(--accent); }
+    .add-recipe-btn {
+      margin-left: auto;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .add-recipe-btn:hover {
+      background: var(--accent-light);
+      transform: scale(1.02);
     }
 
     .grid {
@@ -304,6 +315,11 @@
       margin-bottom: 6px;
       line-height: 1.3;
     }
+    .card-title .author {
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--text-secondary);
+    }
     .card-meta {
       display: flex;
       justify-content: space-between;
@@ -320,10 +336,7 @@
       padding-top: 12px;
       flex-wrap: wrap;
     }
-    .card-actions .btn {
-      padding: 8px 12px;
-      font-size: 0.8rem;
-    }
+    .card-actions .btn { padding: 8px 12px; font-size: 0.8rem; }
     .btn-fav.active {
       background: #E85454;
       color: #fff;
@@ -339,9 +352,14 @@
       background: var(--accent);
       color: #fff;
     }
-    .btn-small {
-      padding: 2px 10px;
-      font-size: 0.75rem;
+    .btn-delete {
+      background: transparent;
+      border: 1px solid #E85454;
+      color: #E85454;
+    }
+    .btn-delete:hover {
+      background: #E85454;
+      color: #fff;
     }
 
     .planner-widget {
@@ -351,10 +369,7 @@
       border-radius: var(--radius);
       border: 1px solid var(--border);
     }
-    .planner-widget h3 {
-      margin-bottom: 12px;
-      font-size: 1.2rem;
-    }
+    .planner-widget h3 { margin-bottom: 12px; font-size: 1.2rem; }
     .planner-days {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
@@ -384,10 +399,7 @@
       margin-top: 4px;
       border: 1px solid var(--border);
     }
-    .planner-day .meal span {
-      color: var(--accent);
-      font-weight: 600;
-    }
+    .planner-day .meal span { color: var(--accent); font-weight: 600; }
     .planner-day .meal .remove-meal {
       background: none;
       border: none;
@@ -432,9 +444,7 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       animation: modalIn 0.3s ease;
     }
-    .modal-sm {
-      max-width: 420px;
-    }
+    .modal-sm { max-width: 450px; }
     @keyframes modalIn {
       0% { opacity: 0; transform: scale(0.95) translateY(20px); }
       100% { opacity: 1; transform: scale(1) translateY(0); }
@@ -451,10 +461,7 @@
       transition: var(--transition);
     }
     .modal-close:hover { color: var(--accent); transform: rotate(90deg); }
-    .modal h2 {
-      font-size: 1.8rem;
-      margin-bottom: 8px;
-    }
+    .modal h2 { font-size: 1.8rem; margin-bottom: 8px; }
     .modal .subtitle {
       color: var(--text-secondary);
       margin-bottom: 16px;
@@ -463,9 +470,7 @@
       gap: 16px;
     }
     .modal .subtitle span { display: flex; align-items: center; gap: 4px; }
-    .modal-section {
-      margin-top: 20px;
-    }
+    .modal-section { margin-top: 20px; }
     .modal-section h4 {
       font-size: 1.1rem;
       margin-bottom: 8px;
@@ -477,24 +482,19 @@
       line-height: 1.6;
     }
     .modal-section li { margin-bottom: 4px; }
-    .modal .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin: 10px 0;
-    }
+    .modal .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
 
-    .auth-form {
+    .auth-form, .recipe-form {
       display: flex;
       flex-direction: column;
       gap: 16px;
       margin-top: 12px;
     }
-    .auth-form label {
+    .auth-form label, .recipe-form label {
       font-weight: 600;
       font-size: 0.9rem;
     }
-    .auth-form input {
+    .auth-form input, .recipe-form input, .recipe-form textarea, .recipe-form select {
       padding: 12px 16px;
       border: 1px solid var(--border);
       border-radius: 12px;
@@ -504,12 +504,18 @@
       font-family: var(--font);
       transition: var(--transition);
     }
-    .auth-form input:focus {
+    .auth-form input:focus, .recipe-form input:focus, .recipe-form textarea:focus, .recipe-form select:focus {
       outline: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(230,126,34,0.15);
     }
-    .auth-form .btn {
+    .recipe-form textarea { resize: vertical; min-height: 60px; }
+    .recipe-form .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .auth-form .btn, .recipe-form .btn {
       justify-content: center;
       padding: 14px;
       font-size: 1rem;
@@ -521,23 +527,13 @@
       color: var(--text-secondary);
       margin-top: 12px;
     }
-    .auth-switch a {
-      color: var(--accent);
-      font-weight: 600;
-      cursor: pointer;
-    }
+    .auth-switch a { color: var(--accent); font-weight: 600; cursor: pointer; }
     .auth-switch a:hover { text-decoration: underline; }
-    .auth-error {
+    .auth-error, .form-error {
       color: #E85454;
       font-size: 0.85rem;
       text-align: center;
       min-height: 20px;
-    }
-    .user-info {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
     }
 
     .day-picker {
@@ -574,17 +570,14 @@
       .search-box input { width: 100%; }
       .grid { grid-template-columns: 1fr; }
       .filters { justify-content: center; }
+      .add-recipe-btn { margin-left: 0; width: 100%; justify-content: center; }
       .planner-days { grid-template-columns: 1fr 1fr; }
       .modal { padding: 20px; }
       .banner { flex-direction: column; text-align: center; padding: 16px; }
-      .header-controls .btn { font-size: 0.75rem; padding: 6px 12px; }
+      .recipe-form .form-row { grid-template-columns: 1fr; }
     }
-    @media (min-width: 768px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 1024px) {
-      .grid { grid-template-columns: repeat(3, 1fr); }
-    }
+    @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .grid { grid-template-columns: repeat(3, 1fr); } }
 
     .card-img .placeholder {
       display: flex;
@@ -631,6 +624,7 @@
   <button class="filter-btn" data-filter="ужин">Ужины</button>
   <button class="filter-btn" data-filter="десерт">Десерты</button>
   <button class="filter-btn" data-filter="диетическое">Диетическое</button>
+  <button class="add-recipe-btn" id="addRecipeBtn">➕ Добавить рецепт</button>
 </div>
 
 <div class="grid" id="recipeGrid"></div>
@@ -676,21 +670,95 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="recipeModalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="recipeModalClose">&times;</button>
+    <h2 id="recipeModalTitle">➕ Новый рецепт</h2>
+    <div id="recipeError" class="form-error"></div>
+    <form class="recipe-form" id="recipeForm" onsubmit="return false;">
+      <label for="recipeTitle">Название блюда *</label>
+      <input type="text" id="recipeTitle" placeholder="Например: Борщ" required>
+
+      <div class="form-row">
+        <div>
+          <label for="recipeCategory">Категория *</label>
+          <select id="recipeCategory">
+            <option value="завтрак">Завтрак</option>
+            <option value="обед">Обед</option>
+            <option value="ужин">Ужин</option>
+            <option value="десерт">Десерт</option>
+            <option value="диетическое">Диетическое</option>
+            <option value="другое">Другое</option>
+          </select>
+        </div>
+        <div>
+          <label for="recipeTime">Время (мин) *</label>
+          <input type="number" id="recipeTime" placeholder="30" min="1" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div>
+          <label for="recipeDifficulty">Сложность</label>
+          <select id="recipeDifficulty">
+            <option value="легко">Легко</option>
+            <option value="средне">Средне</option>
+            <option value="сложно">Сложно</option>
+          </select>
+        </div>
+        <div>
+          <label for="recipeTags">Теги (через запятую)</label>
+          <input type="text" id="recipeTags" placeholder="суп, мясо, обед">
+        </div>
+      </div>
+
+      <label for="recipeImg">Ссылка на фото (необязательно)</label>
+      <input type="url" id="recipeImg" placeholder="https://example.com/photo.jpg">
+
+      <label for="recipeIngredients">Ингредиенты (каждый с новой строки) *</label>
+      <textarea id="recipeIngredients" rows="4" placeholder="500 г курицы&#10;2 л воды&#10;1 морковь" required></textarea>
+
+      <label for="recipeSteps">Пошаговое приготовление (каждый шаг с новой строки) *</label>
+      <textarea id="recipeSteps" rows="5" placeholder="1. Нарежьте курицу&#10;2. Залейте водой&#10;3. Варите 20 минут" required></textarea>
+
+      <button class="btn btn-success" id="recipeSubmit">✅ Сохранить рецепт</button>
+    </form>
+  </div>
+</div>
+
 <script>
   (function() {
     let currentUser = JSON.parse(localStorage.getItem('tasty_user')) || null;
     const users = JSON.parse(localStorage.getItem('tasty_users')) || [];
 
-    const recipes = [
-      { id: 1, title: 'Омлет с овощами', category: 'завтрак', time: 15, difficulty: 'легко', tags: ['завтрак', 'овощи'], rating: 4.8, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrIHq_VIcNRSnkjCqONzQMqNijTMn0uS2NOo7hD1boaA&s=10', ingredients: ['3 яйца', '50 мл молока', '1 помидор', '1/2 болгарского перца', 'зелень', 'соль, перец'], steps: ['Взбейте яйца с молоком и щепоткой соли.', 'Нарежьте овощи кубиками.', 'Вылейте яичную смесь на разогретую сковороду с маслом.', 'Сверху выложите овощи и жарьте под крышкой 5-7 минут.', 'Подавайте с зеленью.'] },
-      { id: 2, title: 'Куриный суп с лапшой', category: 'обед', time: 45, difficulty: 'средне', tags: ['суп', 'курица'], rating: 4.5, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSVUidS19yJyyElTqd58Q_T-7feZM5aiDfw18jymcl_w&s=10', ingredients: ['500 г куриного филе', '2 л воды', '1 морковь', '1 луковица', '100 г лапши', 'зелень', 'соль, перец'], steps: ['Нарежьте курицу кубиками, залейте водой и варите 20 минут.', 'Добавьте нарезанные морковь и лук, варите ещё 10 минут.', 'Засыпьте лапшу и варите 5 минут.', 'Посолите, поперчите, добавьте зелень.'] },
-      { id: 3, title: 'Стейк с картофелем', category: 'ужин', time: 30, difficulty: 'сложно', tags: ['мясо', 'ужин'], rating: 4.9, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPGuKO8rcxTfh8mVPSP4HQBlDY0Bq2N3cKPeZrS9smpA&s=10', ingredients: ['2 стейка говядины', '4 картофелины', 'розмарин', 'чеснок', 'оливковое масло', 'соль, перец'], steps: ['Картофель нарежьте дольками, посыпьте солью и запекайте в духовке 20 минут.', 'Стейки обжарьте на сковороде с маслом по 3-4 минуты с каждой стороны.', 'Добавьте розмарин и чеснок для аромата.', 'Подавайте с картофелем.'] },
-      { id: 4, title: 'Панкейки с ягодами', category: 'завтрак', time: 20, difficulty: 'легко', tags: ['десерт', 'завтрак'], rating: 4.7, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJKLDG5D5y4zuqooSbScGw8bPnAb4j2EPnOHhCJyYtcQ&s=10', ingredients: ['200 г муки', '2 яйца', '200 мл молока', '1 ст.л. сахара', '1 ч.л. разрыхлителя', 'ягоды для подачи'], steps: ['Смешайте муку, сахар и разрыхлитель.', 'Взбейте яйца с молоком, добавьте к сухой смеси.', 'Жарьте на сухой сковороде до золотистого цвета.', 'Подавайте с ягодами и сиропом.'] },
-      { id: 5, title: 'Греческий салат', category: 'обед', time: 10, difficulty: 'легко', tags: ['салат', 'овощи'], rating: 4.3, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDdJN6-YNI94xCC7HoIw9SwS-0DbWAqzkwqXcXvbzi_Q&s=10', ingredients: ['1 огурец', '2 помидора', '1 болгарский перец', '100 г сыра фета', 'маслины', 'оливковое масло'], steps: ['Нарежьте овощи крупными кусками.', 'Добавьте сыр фета и маслины.', 'Заправьте оливковым маслом, посолите.'] },
-      { id: 6, title: 'Лазанья', category: 'ужин', time: 60, difficulty: 'сложно', tags: ['паста', 'мясо'], rating: 4.6, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwERqrmw79Kom2PdcQgTEhBQAc_ielRNEkfcKLCgoPQA&s=10', ingredients: ['500 г фарша', '9 листов лазаньи', '2 луковицы', 'чеснок', 'томатный соус', 'соус бешамель', 'сыр'], steps: ['Обжарьте фарш с луком и чесноком, добавьте томатный соус.', 'Приготовьте соус бешамель.', 'Соберите лазанью: соус, листы, фарш, бешамель, сыр.', 'Запекайте 40 минут при 180°C.'] },
-      { id: 7, title: 'Тирамису', category: 'десерт', time: 40, difficulty: 'средне', tags: ['десерт', 'кофе'], rating: 4.9, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4BVn2UFHzsfQiu8KTgiVptSGFrfrWXTAMiiWJUJJC6w&s=10', ingredients: ['250 г маскарпоне', '3 яйца', '100 г сахара', 'савоярди', 'крепкий кофе', 'какао-порошок'], steps: ['Взбейте желтки с сахаром, добавьте маскарпоне.', 'Взбейте белки в пену, аккуратно вмешайте.', 'Окуните савоярди в кофе и выложите слоями.', 'Посыпьте какао и охладите 3 часа.'] },
-      { id: 8, title: 'Овощное рагу', category: 'диетическое', time: 35, difficulty: 'средне', tags: ['диетическое', 'овощи'], rating: 4.2, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUnJlVNECZoWWI57kX6IUQKSkoMN6DAIvvGjEE386c6A&s=10', ingredients: ['1 кабачок', '1 баклажан', '2 помидора', '1 морковь', 'лук', 'чеснок', 'растительное масло'], steps: ['Нарежьте все овощи кубиками.', 'Обжарьте лук и морковь, добавьте остальные овощи.', 'Тушите под крышкой 20 минут до готовности.', 'Посолите, добавьте чеснок.'] }
+    let userRecipes = JSON.parse(localStorage.getItem('tasty_recipes')) || [];
+
+    const defaultRecipes = [
+      { id: 1, title: 'Омлет с овощами', category: 'завтрак', time: 15, difficulty: 'легко', tags: ['завтрак', 'овощи'], rating: 4.8, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrIHq_VIcNRSnkjCqONzQMqNijTMn0uS2NOo7hD1boaA&s=10', author: 'TastyKitchen', ingredients: ['3 яйца', '50 мл молока', '1 помидор', '1/2 болгарского перца', 'зелень', 'соль, перец'], steps: ['Взбейте яйца с молоком и щепоткой соли.', 'Нарежьте овощи кубиками.', 'Вылейте яичную смесь на разогретую сковороду с маслом.', 'Сверху выложите овощи и жарьте под крышкой 5-7 минут.', 'Подавайте с зеленью.'] },
+      { id: 2, title: 'Куриный суп с лапшой', category: 'обед', time: 45, difficulty: 'средне', tags: ['суп', 'курица'], rating: 4.5, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSVUidS19yJyyElTqd58Q_T-7feZM5aiDfw18jymcl_w&s=10', author: 'TastyKitchen', ingredients: ['500 г куриного филе', '2 л воды', '1 морковь', '1 луковица', '100 г лапши', 'зелень', 'соль, перец'], steps: ['Нарежьте курицу кубиками, залейте водой и варите 20 минут.', 'Добавьте нарезанные морковь и лук, варите ещё 10 минут.', 'Засыпьте лапшу и варите 5 минут.', 'Посолите, поперчите, добавьте зелень.'] },
+      { id: 3, title: 'Стейк с картофелем', category: 'ужин', time: 30, difficulty: 'сложно', tags: ['мясо', 'ужин'], rating: 4.9, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPGuKO8rcxTfh8mVPSP4HQBlDY0Bq2N3cKPeZrS9smpA&s=10', author: 'TastyKitchen', ingredients: ['2 стейка говядины', '4 картофелины', 'розмарин', 'чеснок', 'оливковое масло', 'соль, перец'], steps: ['Картофель нарежьте дольками, посыпьте солью и запекайте в духовке 20 минут.', 'Стейки обжарьте на сковороде с маслом по 3-4 минуты с каждой стороны.', 'Добавьте розмарин и чеснок для аромата.', 'Подавайте с картофелем.'] },
+      { id: 4, title: 'Панкейки с ягодами', category: 'завтрак', time: 20, difficulty: 'легко', tags: ['десерт', 'завтрак'], rating: 4.7, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJKLDG5D5y4zuqooSbScGw8bPnAb4j2EPnOHhCJyYtcQ&s=10', author: 'TastyKitchen', ingredients: ['200 г муки', '2 яйца', '200 мл молока', '1 ст.л. сахара', '1 ч.л. разрыхлителя', 'ягоды для подачи'], steps: ['Смешайте муку, сахар и разрыхлитель.', 'Взбейте яйца с молоком, добавьте к сухой смеси.', 'Жарьте на сухой сковороде до золотистого цвета.', 'Подавайте с ягодами и сиропом.'] },
+      { id: 5, title: 'Греческий салат', category: 'обед', time: 10, difficulty: 'легко', tags: ['салат', 'овощи'], rating: 4.3, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDdJN6-YNI94xCC7HoIw9SwS-0DbWAqzkwqXcXvbzi_Q&s=10', author: 'TastyKitchen', ingredients: ['1 огурец', '2 помидора', '1 болгарский перец', '100 г сыра фета', 'маслины', 'оливковое масло'], steps: ['Нарежьте овощи крупными кусками.', 'Добавьте сыр фета и маслины.', 'Заправьте оливковым маслом, посолите.'] },
+      { id: 6, title: 'Лазанья', category: 'ужин', time: 60, difficulty: 'сложно', tags: ['паста', 'мясо'], rating: 4.6, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwERqrmw79Kom2PdcQgTEhBQAc_ielRNEkfcKLCgoPQA&s=10', author: 'TastyKitchen', ingredients: ['500 г фарша', '9 листов лазаньи', '2 луковицы', 'чеснок', 'томатный соус', 'соус бешамель', 'сыр'], steps: ['Обжарьте фарш с луком и чесноком, добавьте томатный соус.', 'Приготовьте соус бешамель.', 'Соберите лазанью: соус, листы, фарш, бешамель, сыр.', 'Запекайте 40 минут при 180°C.'] },
+      { id: 7, title: 'Тирамису', category: 'десерт', time: 40, difficulty: 'средне', tags: ['десерт', 'кофе'], rating: 4.9, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4BVn2UFHzsfQiu8KTgiVptSGFrfrWXTAMiiWJUJJC6w&s=10', author: 'TastyKitchen', ingredients: ['250 г маскарпоне', '3 яйца', '100 г сахара', 'савоярди', 'крепкий кофе', 'какао-порошок'], steps: ['Взбейте желтки с сахаром, добавьте маскарпоне.', 'Взбейте белки в пену, аккуратно вмешайте.', 'Окуните савоярди в кофе и выложите слоями.', 'Посыпьте какао и охладите 3 часа.'] },
+      { id: 8, title: 'Овощное рагу', category: 'диетическое', time: 35, difficulty: 'средне', tags: ['диетическое', 'овощи'], rating: 4.2, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUnJlVNECZoWWI57kX6IUQKSkoMN6DAIvvGjEE386c6A&s=10', author: 'TastyKitchen', ingredients: ['1 кабачок', '1 баклажан', '2 помидора', '1 морковь', 'лук', 'чеснок', 'растительное масло'], steps: ['Нарежьте все овощи кубиками.', 'Обжарьте лук и морковь, добавьте остальные овощи.', 'Тушите под крышкой 20 минут до готовности.', 'Посолите, добавьте чеснок.'] }
     ];
+
+    let allRecipes = [];
+
+    function loadRecipes() {
+      const stored = JSON.parse(localStorage.getItem('tasty_recipes')) || [];
+      userRecipes = stored;
+      allRecipes = [...defaultRecipes, ...stored];
+      allRecipes = allRecipes.filter((r, i, arr) => arr.findIndex(x => x.id === r.id) === i);
+    }
+
+    function saveRecipes() {
+      localStorage.setItem('tasty_recipes', JSON.stringify(userRecipes));
+      loadRecipes();
+    }
+
+    loadRecipes();
 
     let currentFilter = 'all';
     let searchQuery = '';
@@ -698,6 +766,7 @@
     let planner = JSON.parse(localStorage.getItem('tasty_planner')) || {};
     let pendingRecipeId = null;
     let isLoginMode = true;
+    let editingRecipeId = null;
 
     const grid = document.getElementById('recipeGrid');
     const searchInput = document.getElementById('searchInput');
@@ -726,6 +795,21 @@
     const userName = document.getElementById('userName');
     const userIcon = document.getElementById('userIcon');
     const bannerBtn = document.getElementById('bannerBtn');
+    const addRecipeBtn = document.getElementById('addRecipeBtn');
+    const recipeModalOverlay = document.getElementById('recipeModalOverlay');
+    const recipeModalClose = document.getElementById('recipeModalClose');
+    const recipeModalTitle = document.getElementById('recipeModalTitle');
+    const recipeError = document.getElementById('recipeError');
+    const recipeForm = document.getElementById('recipeForm');
+    const recipeTitle = document.getElementById('recipeTitle');
+    const recipeCategory = document.getElementById('recipeCategory');
+    const recipeTime = document.getElementById('recipeTime');
+    const recipeDifficulty = document.getElementById('recipeDifficulty');
+    const recipeTags = document.getElementById('recipeTags');
+    const recipeImg = document.getElementById('recipeImg');
+    const recipeIngredients = document.getElementById('recipeIngredients');
+    const recipeSteps = document.getElementById('recipeSteps');
+    const recipeSubmit = document.getElementById('recipeSubmit');
 
     function updateUserUI() {
       if (currentUser) {
@@ -739,8 +823,13 @@
       }
     }
 
+    function canEditRecipe(recipe) {
+      if (!currentUser) return false;
+      return recipe.author === currentUser.name || recipe.author === 'TastyKitchen';
+    }
+
     function renderRecipes() {
-      let filtered = recipes.filter(r => {
+      let filtered = allRecipes.filter(r => {
         const matchCategory = currentFilter === 'all' || r.category === currentFilter;
         const matchSearch = r.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                             r.tags.some(t => t.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -748,30 +837,32 @@
       });
 
       if (filtered.length === 0) {
-        grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-secondary); padding:40px;">🍽️ Рецептов не найдено. Попробуйте изменить фильтры.</p>`;
+        grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-secondary); padding:40px;">🍽️ Рецептов не найдено. Добавьте свой!</p>`;
         return;
       }
 
       grid.innerHTML = filtered.map(r => {
         const isFav = favorites.includes(r.id);
+        const isOwn = currentUser && r.author === currentUser.name;
         return `
           <div class="card" data-id="${r.id}">
             <div class="card-img" data-id="${r.id}">
-              <img src="${r.img}" alt="${r.title}" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=placeholder>🍳</div>';">
+              <img src="${r.img || 'https://via.placeholder.com/400x300/E8DDD4/6B5340?text=🍳'}" alt="${r.title}" loading="lazy" onerror="this.style.display='none'; this.parentElement.innerHTML='<div class=placeholder>🍳</div>';">
             </div>
             <div class="card-tags">
               ${r.tags.map(t => `<span class="tag">${t}</span>`).join('')}
             </div>
-            <div class="card-title">${r.title}</div>
+            <div class="card-title">${r.title} <span class="author">by ${r.author || 'TastyKitchen'}</span></div>
             <div class="card-meta">
               <span>⏱ ${r.time} мин</span>
-              <span>⭐ ${r.rating}</span>
+              <span>⭐ ${r.rating || 4.0}</span>
               <span>${r.difficulty}</span>
             </div>
             <div class="card-actions">
               <button class="btn btn-primary btn-plan" data-id="${r.id}">📅 В план</button>
               <button class="btn btn-outline btn-fav ${isFav ? 'active' : ''}" data-id="${r.id}">${isFav ? '❤️' : '🤍'}</button>
-              <button class="btn btn-detail" data-id="${r.id}">📖 Подробнее</button>
+              <button class="btn btn-detail" data-id="${r.id}">📖</button>
+              ${isOwn ? `<button class="btn btn-delete btn-delete-recipe" data-id="${r.id}">✕</button>` : ''}
             </div>
           </div>
         `;
@@ -806,15 +897,37 @@
           openModal(id);
         });
       });
+      document.querySelectorAll('.btn-delete-recipe').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          const id = parseInt(this.dataset.id);
+          deleteRecipe(id);
+        });
+      });
+    }
+
+    function deleteRecipe(id) {
+      const recipe = allRecipes.find(r => r.id === id);
+      if (!recipe) return;
+      if (recipe.author !== currentUser?.name) {
+        showToast('❌ Вы не можете удалить этот рецепт.');
+        return;
+      }
+      if (confirm(`Удалить рецепт "${recipe.title}"?`)) {
+        userRecipes = userRecipes.filter(r => r.id !== id);
+        saveRecipes();
+        favorites = favorites.filter(f => f !== id);
+        localStorage.setItem('tasty_favorites', JSON.stringify(favorites));
+        renderRecipes();
+        renderPlanner();
+        showToast(`🗑️ "${recipe.title}" удалён.`);
+      }
     }
 
     function toggleFavorite(id) {
       const idx = favorites.indexOf(id);
-      if (idx > -1) {
-        favorites.splice(idx, 1);
-      } else {
-        favorites.push(id);
-      }
+      if (idx > -1) favorites.splice(idx, 1);
+      else favorites.push(id);
       localStorage.setItem('tasty_favorites', JSON.stringify(favorites));
       renderRecipes();
       renderPlanner();
@@ -823,7 +936,7 @@
     function addToPlanner(id, day) {
       if (!currentUser) { openAuth(); return; }
       if (!planner[day]) planner[day] = [];
-      const recipe = recipes.find(r => r.id === id);
+      const recipe = allRecipes.find(r => r.id === id);
       if (!recipe) return;
       if (planner[day].includes(recipe.title)) {
         showToast(`⚠️ "${recipe.title}" уже есть в плане на ${day}.`);
@@ -881,14 +994,12 @@
     }
 
     function openDayPicker(recipeId) {
-      const recipe = recipes.find(r => r.id === recipeId);
+      const recipe = allRecipes.find(r => r.id === recipeId);
       if (!recipe) return;
       pendingRecipeId = recipeId;
       dayPickerRecipeName.textContent = `"${recipe.title}" — выберите день:`;
       const days = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
-      dayPickerButtons.innerHTML = days.map(d => `
-        <button data-day="${d}">${d}</button>
-      `).join('');
+      dayPickerButtons.innerHTML = days.map(d => `<button data-day="${d}">${d}</button>`).join('');
       dayPickerOverlay.classList.add('open');
       document.body.classList.add('no-scroll');
 
@@ -913,14 +1024,16 @@
     dayPickerClose.addEventListener('click', closeDayPicker);
 
     function openModal(id) {
-      const recipe = recipes.find(r => r.id === id);
+      const recipe = allRecipes.find(r => r.id === id);
       if (!recipe) return;
       const isFav = favorites.includes(recipe.id);
+      const isOwn = currentUser && recipe.author === currentUser.name;
       modalBody.innerHTML = `
         <h2>${recipe.title}</h2>
+        <div style="color:var(--text-secondary);font-size:0.85rem;margin-bottom:8px;">👨‍🍳 ${recipe.author || 'TastyKitchen'}</div>
         <div class="subtitle">
           <span>⏱ ${recipe.time} мин</span>
-          <span>⭐ ${recipe.rating}</span>
+          <span>⭐ ${recipe.rating || 4.0}</span>
           <span>${recipe.difficulty}</span>
           <span>📂 ${recipe.category}</span>
         </div>
@@ -942,6 +1055,7 @@
         <div style="margin-top:20px; display:flex; gap:10px; flex-wrap:wrap;">
           <button class="btn btn-primary" id="modalPlanBtn" data-id="${recipe.id}">📅 В план</button>
           <button class="btn btn-outline btn-fav ${isFav ? 'active' : ''}" id="modalFavBtn" data-id="${recipe.id}">${isFav ? '❤️ В избранном' : '🤍 В избранное'}</button>
+          ${isOwn ? `<button class="btn btn-outline" id="modalEditBtn" data-id="${recipe.id}">✏️ Редактировать</button>` : ''}
         </div>
       `;
       modalOverlay.classList.add('open');
@@ -959,6 +1073,14 @@
         toggleFavorite(id);
         openModal(id);
       });
+      const editBtn = document.getElementById('modalEditBtn');
+      if (editBtn) {
+        editBtn.addEventListener('click', function() {
+          const id = parseInt(this.dataset.id);
+          closeModal();
+          openRecipeEditor(id);
+        });
+      }
     }
 
     function closeModal() {
@@ -971,9 +1093,12 @@
     });
     modalClose.addEventListener('click', closeModal);
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
-      if (e.key === 'Escape' && dayPickerOverlay.classList.contains('open')) closeDayPicker();
-      if (e.key === 'Escape' && authOverlay.classList.contains('open')) closeAuth();
+      if (e.key === 'Escape') {
+        if (modalOverlay.classList.contains('open')) closeModal();
+        if (dayPickerOverlay.classList.contains('open')) closeDayPicker();
+        if (authOverlay.classList.contains('open')) closeAuth();
+        if (recipeModalOverlay.classList.contains('open')) closeRecipeEditor();
+      }
     });
 
     function openAuth(mode) {
@@ -981,13 +1106,13 @@
         isLoginMode = false;
         authTitle.textContent = 'Регистрация';
         authSubmit.textContent = 'Зарегистрироваться';
-        authSwitch.innerHTML = `Уже есть аккаунт? <a id="authToggleLink">Войти</a>`;
+        authSwitch.innerHTML = 'Уже есть аккаунт? <a id="authToggleLink">Войти</a>';
         authNameField.style.display = 'block';
       } else {
         isLoginMode = true;
         authTitle.textContent = 'Вход';
         authSubmit.textContent = 'Войти';
-        authSwitch.innerHTML = `Нет аккаунта? <a id="authToggleLink">Зарегистрироваться</a>`;
+        authSwitch.innerHTML = 'Нет аккаунта? <a id="authToggleLink">Зарегистрироваться</a>';
         authNameField.style.display = 'block';
       }
       authError.textContent = '';
@@ -1072,11 +1197,109 @@
     });
 
     bannerBtn.addEventListener('click', function() {
-      if (!currentUser) {
-        openAuth('register');
+      if (!currentUser) openAuth('register');
+      else showToast('🍳 Вы уже с нами! Добавляйте рецепты в план.');
+    });
+
+    function openRecipeEditor(editId) {
+      if (!currentUser) { openAuth(); return; }
+      editingRecipeId = editId || null;
+      if (editingRecipeId) {
+        const recipe = allRecipes.find(r => r.id === editingRecipeId);
+        if (!recipe || recipe.author !== currentUser.name) {
+          showToast('❌ Вы не можете редактировать этот рецепт.');
+          return;
+        }
+        recipeModalTitle.textContent = '✏️ Редактировать рецепт';
+        recipeTitle.value = recipe.title || '';
+        recipeCategory.value = recipe.category || 'другое';
+        recipeTime.value = recipe.time || '';
+        recipeDifficulty.value = recipe.difficulty || 'средне';
+        recipeTags.value = (recipe.tags || []).join(', ');
+        recipeImg.value = recipe.img || '';
+        recipeIngredients.value = (recipe.ingredients || []).join('\n');
+        recipeSteps.value = (recipe.steps || []).join('\n');
       } else {
-        showToast('🍳 Вы уже с нами! Добавляйте рецепты в план.');
+        recipeModalTitle.textContent = '➕ Новый рецепт';
+        recipeForm.reset();
+        recipeCategory.value = 'другое';
+        recipeDifficulty.value = 'средне';
+        recipeImg.value = '';
       }
+      recipeError.textContent = '';
+      recipeModalOverlay.classList.add('open');
+      document.body.classList.add('no-scroll');
+    }
+
+    function closeRecipeEditor() {
+      recipeModalOverlay.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+      editingRecipeId = null;
+    }
+
+    recipeModalClose.addEventListener('click', closeRecipeEditor);
+    recipeModalOverlay.addEventListener('click', function(e) {
+      if (e.target === this) closeRecipeEditor();
+    });
+
+    function saveRecipe() {
+      const title = recipeTitle.value.trim();
+      const category = recipeCategory.value;
+      const time = parseInt(recipeTime.value);
+      const difficulty = recipeDifficulty.value;
+      const tagsStr = recipeTags.value.trim();
+      const img = recipeImg.value.trim();
+      const ingredientsStr = recipeIngredients.value.trim();
+      const stepsStr = recipeSteps.value.trim();
+
+      recipeError.textContent = '';
+
+      if (!title) { recipeError.textContent = 'Введите название блюда.'; return; }
+      if (!time || time < 1) { recipeError.textContent = 'Укажите корректное время приготовления.'; return; }
+      if (!ingredientsStr) { recipeError.textContent = 'Добавьте ингредиенты.'; return; }
+      if (!stepsStr) { recipeError.textContent = 'Добавьте шаги приготовления.'; return; }
+
+      const tags = tagsStr ? tagsStr.split(',').map(t => t.trim().toLowerCase()).filter(t => t) : [];
+      const ingredients = ingredientsStr.split('\n').filter(i => i.trim());
+      const steps = stepsStr.split('\n').filter(s => s.trim());
+
+      const recipeData = {
+        title,
+        category,
+        time,
+        difficulty,
+        tags,
+        img: img || 'https://via.placeholder.com/400x300/E8DDD4/6B5340?text=🍳',
+        ingredients,
+        steps,
+        author: currentUser.name,
+        rating: 4.0
+      };
+
+      if (editingRecipeId) {
+        const idx = userRecipes.findIndex(r => r.id === editingRecipeId);
+        if (idx === -1) { showToast('❌ Рецепт не найден.'); return; }
+        userRecipes[idx] = { ...userRecipes[idx], ...recipeData };
+        saveRecipes();
+        showToast(`✅ Рецепт "${title}" обновлён!`);
+      } else {
+        const maxId = allRecipes.reduce((max, r) => Math.max(max, r.id), 0);
+        const newRecipe = { id: maxId + 1, ...recipeData };
+        userRecipes.push(newRecipe);
+        saveRecipes();
+        showToast(`🎉 Рецепт "${title}" добавлен!`);
+      }
+
+      closeRecipeEditor();
+      renderRecipes();
+      renderPlanner();
+    }
+
+    recipeSubmit.addEventListener('click', saveRecipe);
+
+    addRecipeBtn.addEventListener('click', function() {
+      if (!currentUser) { openAuth(); return; }
+      openRecipeEditor(null);
     });
 
     function showToast(message) {
