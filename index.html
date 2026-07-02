@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TastyKitchen — агрегатор рецептов</title>
-  <!-- Фавикон (SVG через data-URI) -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23E67E22'/%3E%3Ccircle cx='50' cy='45' r='28' fill='%23FFFFFF' opacity='0.9'/%3E%3Cpath d='M35 35 L45 35 L45 55 L35 55 Z' fill='%23E67E22'/%3E%3Cpath d='M55 35 L65 35 L65 55 L55 55 Z' fill='%23E67E22'/%3E%3Cpath d='M42 30 L58 30 L50 20 Z' fill='%23E67E22'/%3E%3Ccircle cx='50' cy='42' r='6' fill='%23E67E22'/%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='40' fill='%23E67E22'/%3E%3Ccircle cx='90' cy='80' r='50' fill='%23FFFFFF' opacity='0.9'/%3E%3Cpath d='M60 65 L80 65 L80 95 L60 95 Z' fill='%23E67E22'/%3E%3Cpath d='M100 65 L120 65 L120 95 L100 95 Z' fill='%23E67E22'/%3E%3Cpath d='M75 55 L105 55 L90 40 Z' fill='%23E67E22'/%3E%3Ccircle cx='90' cy='78' r='10' fill='%23E67E22'/%3E%3C/svg%3E">
   <style>
-    /* ===== CSS-переменные (светлая тема) ===== */
     :root {
       --bg: #F8F4F0;
       --card-bg: #FFFFFF;
@@ -24,7 +22,6 @@
       --modal-overlay: rgba(0,0,0,0.5);
     }
 
-    /* Тёмная тема */
     [data-theme="dark"] {
       --bg: #1A1410;
       --card-bg: #2A221C;
@@ -35,7 +32,6 @@
       --modal-overlay: rgba(0,0,0,0.7);
     }
 
-    /* ===== Сброс и база ===== */
     * {
       margin: 0;
       padding: 0;
@@ -54,7 +50,6 @@
     a { color: var(--accent); text-decoration: none; }
     img { max-width: 100%; display: block; }
 
-    /* ===== Шапка ===== */
     header {
       display: flex;
       flex-wrap: wrap;
@@ -63,7 +58,7 @@
       gap: 12px;
       padding: 12px 0 20px;
       border-bottom: 2px solid var(--border);
-      margin-bottom: 24px;
+      margin-bottom: 16px;
     }
     .logo {
       font-size: 1.8rem;
@@ -75,7 +70,7 @@
     .header-controls {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
       flex-wrap: wrap;
     }
     .search-box {
@@ -96,7 +91,7 @@
       background: transparent;
       padding: 10px 0;
       font-size: 0.95rem;
-      width: 180px;
+      width: 160px;
       color: var(--text);
       outline: none;
     }
@@ -108,6 +103,38 @@
       cursor: pointer;
       color: var(--text-secondary);
       padding: 4px;
+    }
+
+    .btn {
+      background: var(--bg);
+      border: none;
+      padding: 8px 16px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--accent-light);
+      transform: scale(0.97);
+    }
+    .btn-outline {
+      border-color: var(--border);
+      background: transparent;
+    }
+    .btn-outline:hover {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
     }
     .theme-toggle {
       background: var(--card-bg);
@@ -125,8 +152,72 @@
     .theme-toggle:hover {
       border-color: var(--accent);
     }
+    .user-btn {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 40px;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      color: var(--text);
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .user-btn:hover {
+      border-color: var(--accent);
+    }
+    .user-btn .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
 
-    /* ===== Фильтры ===== */
+    .banner {
+      background: linear-gradient(135deg, #E67E22, #F39C12);
+      border-radius: var(--radius);
+      padding: 20px 28px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(230,126,34,0.3);
+    }
+    .banner h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+    .banner p {
+      opacity: 0.9;
+      font-size: 0.95rem;
+    }
+    .banner .btn-banner {
+      background: #fff;
+      color: #E67E22;
+      border: none;
+      padding: 10px 28px;
+      border-radius: 40px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 0.95rem;
+    }
+    .banner .btn-banner:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
     .filters {
       display: flex;
       flex-wrap: wrap;
@@ -154,7 +245,6 @@
       border-color: var(--accent);
     }
 
-    /* ===== Сетка карточек ===== */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -167,11 +257,9 @@
       padding: 16px;
       box-shadow: 0 4px 16px var(--shadow);
       transition: transform var(--transition), box-shadow var(--transition);
-      cursor: default;
       display: flex;
       flex-direction: column;
       border: 1px solid var(--border);
-      position: relative;
       animation: fadeUp 0.5s ease forwards;
     }
     .card:hover {
@@ -185,15 +273,13 @@
       border-radius: 12px;
       overflow: hidden;
       margin-bottom: 12px;
-      position: relative;
-      background-image: linear-gradient(135deg, var(--border) 0%, transparent 100%);
+      cursor: pointer;
     }
     .card-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.4s;
-      cursor: pointer;
     }
     .card:hover .card-img img { transform: scale(1.02); }
     .card-tags {
@@ -234,36 +320,9 @@
       padding-top: 12px;
       flex-wrap: wrap;
     }
-    .btn {
-      background: var(--bg);
-      border: none;
-      padding: 8px 14px;
-      border-radius: 40px;
-      font-size: 0.85rem;
-      cursor: pointer;
-      color: var(--text);
-      transition: var(--transition);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      border: 1px solid transparent;
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-    .btn-primary:hover {
-      background: var(--accent-light);
-      transform: scale(0.97);
-    }
-    .btn-outline {
-      border-color: var(--border);
-      background: transparent;
-    }
-    .btn-outline:hover {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: #fff;
+    .card-actions .btn {
+      padding: 8px 12px;
+      font-size: 0.8rem;
     }
     .btn-fav.active {
       background: #E85454;
@@ -285,7 +344,6 @@
       font-size: 0.75rem;
     }
 
-    /* ===== Планировщик ===== */
     .planner-widget {
       margin-top: 32px;
       padding: 20px;
@@ -319,7 +377,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       background: var(--card-bg);
       padding: 2px 8px 2px 12px;
       border-radius: 20px;
@@ -350,7 +408,6 @@
       padding: 8px 0;
     }
 
-    /* ===== Модальное окно ===== */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
@@ -375,6 +432,9 @@
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       animation: modalIn 0.3s ease;
     }
+    .modal-sm {
+      max-width: 420px;
+    }
     @keyframes modalIn {
       0% { opacity: 0; transform: scale(0.95) translateY(20px); }
       100% { opacity: 1; transform: scale(1) translateY(0); }
@@ -392,7 +452,7 @@
     }
     .modal-close:hover { color: var(--accent); transform: rotate(90deg); }
     .modal h2 {
-      font-size: 2rem;
+      font-size: 1.8rem;
       margin-bottom: 8px;
     }
     .modal .subtitle {
@@ -424,7 +484,62 @@
       margin: 10px 0;
     }
 
-    /* Стили для выбора дня (пикер) */
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 12px;
+    }
+    .auth-form label {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    .auth-form input {
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 1rem;
+      font-family: var(--font);
+      transition: var(--transition);
+    }
+    .auth-form input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(230,126,34,0.15);
+    }
+    .auth-form .btn {
+      justify-content: center;
+      padding: 14px;
+      font-size: 1rem;
+      margin-top: 4px;
+    }
+    .auth-switch {
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 12px;
+    }
+    .auth-switch a {
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .auth-switch a:hover { text-decoration: underline; }
+    .auth-error {
+      color: #E85454;
+      font-size: 0.85rem;
+      text-align: center;
+      min-height: 20px;
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+
     .day-picker {
       display: flex;
       gap: 10px;
@@ -449,13 +564,11 @@
       border-color: var(--accent);
     }
 
-    /* ===== Анимации ===== */
     @keyframes fadeUp {
       0% { opacity: 0; transform: translateY(20px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    /* ===== Адаптивность ===== */
     @media (max-width: 640px) {
       header { flex-direction: column; align-items: stretch; }
       .search-box input { width: 100%; }
@@ -463,6 +576,8 @@
       .filters { justify-content: center; }
       .planner-days { grid-template-columns: 1fr 1fr; }
       .modal { padding: 20px; }
+      .banner { flex-direction: column; text-align: center; padding: 16px; }
+      .header-controls .btn { font-size: 0.75rem; padding: 6px 12px; }
     }
     @media (min-width: 768px) {
       .grid { grid-template-columns: repeat(2, 1fr); }
@@ -471,7 +586,6 @@
       .grid { grid-template-columns: repeat(3, 1fr); }
     }
 
-    /* Скелетон */
     .card-img .placeholder {
       display: flex;
       align-items: center;
@@ -482,8 +596,6 @@
       color: var(--text-secondary);
       font-size: 2rem;
     }
-
-    /* Блокировка скролла при открытом модальном окне */
     body.no-scroll { overflow: hidden; }
   </style>
 </head>
@@ -497,10 +609,21 @@
       <button id="searchBtn">🔍</button>
     </div>
     <button class="theme-toggle" id="themeToggle">🌙 Тёмная</button>
+    <button class="user-btn" id="userBtn">
+      <span id="userIcon">👤</span>
+      <span id="userName">Войти</span>
+    </button>
   </div>
 </header>
 
-<!-- Фильтры -->
+<div class="banner" id="mainBanner">
+  <div>
+    <h2>🍳 Готовьте с TastyKitchen!</h2>
+    <p>Тысячи рецептов, планировщик меню и список покупок — всё в одном месте.</p>
+  </div>
+  <button class="btn-banner" id="bannerBtn">Начать готовить →</button>
+</div>
+
 <div class="filters" id="filterContainer">
   <button class="filter-btn active" data-filter="all">Все</button>
   <button class="filter-btn" data-filter="завтрак">Завтраки</button>
@@ -510,16 +633,13 @@
   <button class="filter-btn" data-filter="диетическое">Диетическое</button>
 </div>
 
-<!-- Сетка рецептов -->
 <div class="grid" id="recipeGrid"></div>
 
-<!-- Планировщик -->
 <div class="planner-widget">
   <h3>📅 План на неделю</h3>
   <div class="planner-days" id="plannerDays"></div>
 </div>
 
-<!-- Модальное окно для просмотра рецепта -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal" id="modalContent">
     <button class="modal-close" id="modalClose">&times;</button>
@@ -527,9 +647,8 @@
   </div>
 </div>
 
-<!-- Модальное окно для выбора дня (пикер) -->
 <div class="modal-overlay" id="dayPickerOverlay">
-  <div class="modal" style="max-width: 500px;">
+  <div class="modal modal-sm">
     <button class="modal-close" id="dayPickerClose">&times;</button>
     <h3 style="text-align:center; margin-bottom: 8px;">📅 Выберите день</h3>
     <p style="text-align:center; color: var(--text-secondary);" id="dayPickerRecipeName"></p>
@@ -537,115 +656,49 @@
   </div>
 </div>
 
+<div class="modal-overlay" id="authOverlay">
+  <div class="modal modal-sm">
+    <button class="modal-close" id="authClose">&times;</button>
+    <h2 id="authTitle">Вход</h2>
+    <div class="auth-form" id="authForm">
+      <div id="authError" class="auth-error"></div>
+      <div id="authNameField">
+        <label for="authName">Имя</label>
+        <input type="text" id="authName" placeholder="Введите имя">
+      </div>
+      <label for="authPass">Пароль</label>
+      <input type="password" id="authPass" placeholder="Введите пароль">
+      <button class="btn btn-primary" id="authSubmit">Войти</button>
+      <div class="auth-switch" id="authSwitch">
+        Нет аккаунта? <a id="authToggleLink">Зарегистрироваться</a>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   (function() {
-    // ===== Данные рецептов (с ингредиентами и шагами) =====
+    let currentUser = JSON.parse(localStorage.getItem('tasty_user')) || null;
+    const users = JSON.parse(localStorage.getItem('tasty_users')) || [];
+
     const recipes = [
-      {
-        id: 1,
-        title: 'Омлет с овощами',
-        category: 'завтрак',
-        time: 15,
-        difficulty: 'легко',
-        tags: ['завтрак', 'овощи'],
-        rating: 4.8,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrIHq_VIcNRSnkjCqONzQMqNijTMn0uS2NOo7hD1boaA&s=10',
-        ingredients: ['3 яйца', '50 мл молока', '1 помидор', '1/2 болгарского перца', 'зелень', 'соль, перец'],
-        steps: ['Взбейте яйца с молоком и щепоткой соли.', 'Нарежьте овощи кубиками.', 'Вылейте яичную смесь на разогретую сковороду с маслом.', 'Сверху выложите овощи и жарьте под крышкой 5-7 минут.', 'Подавайте с зеленью.']
-      },
-      {
-        id: 2,
-        title: 'Куриный суп с лапшой',
-        category: 'обед',
-        time: 45,
-        difficulty: 'средне',
-        tags: ['суп', 'курица'],
-        rating: 4.5,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSVUidS19yJyyElTqd58Q_T-7feZM5aiDfw18jymcl_w&s=10',
-        ingredients: ['500 г куриного филе', '2 л воды', '1 морковь', '1 луковица', '100 г лапши', 'зелень', 'соль, перец'],
-        steps: ['Нарежьте курицу кубиками, залейте водой и варите 20 минут.', 'Добавьте нарезанные морковь и лук, варите ещё 10 минут.', 'Засыпьте лапшу и варите 5 минут.', 'Посолите, поперчите, добавьте зелень.']
-      },
-      {
-        id: 3,
-        title: 'Стейк с картофелем',
-        category: 'ужин',
-        time: 30,
-        difficulty: 'сложно',
-        tags: ['мясо', 'ужин'],
-        rating: 4.9,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPGuKO8rcxTfh8mVPSP4HQBlDY0Bq2N3cKPeZrS9smpA&s=10',
-        ingredients: ['2 стейка говядины', '4 картофелины', 'розмарин', 'чеснок', 'оливковое масло', 'соль, перец'],
-        steps: ['Картофель нарежьте дольками, посыпьте солью и запекайте в духовке 20 минут.', 'Стейки обжарьте на сковороде с маслом по 3-4 минуты с каждой стороны.', 'Добавьте розмарин и чеснок для аромата.', 'Подавайте с картофелем.']
-      },
-      {
-        id: 4,
-        title: 'Панкейки с ягодами',
-        category: 'завтрак',
-        time: 20,
-        difficulty: 'легко',
-        tags: ['десерт', 'завтрак'],
-        rating: 4.7,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJKLDG5D5y4zuqooSbScGw8bPnAb4j2EPnOHhCJyYtcQ&s=10',
-        ingredients: ['200 г муки', '2 яйца', '200 мл молока', '1 ст.л. сахара', '1 ч.л. разрыхлителя', 'ягоды для подачи'],
-        steps: ['Смешайте муку, сахар и разрыхлитель.', 'Взбейте яйца с молоком, добавьте к сухой смеси.', 'Жарьте на сухой сковороде до золотистого цвета.', 'Подавайте с ягодами и сиропом.']
-      },
-      {
-        id: 5,
-        title: 'Греческий салат',
-        category: 'обед',
-        time: 10,
-        difficulty: 'легко',
-        tags: ['салат', 'овощи'],
-        rating: 4.3,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDdJN6-YNI94xCC7HoIw9SwS-0DbWAqzkwqXcXvbzi_Q&s=10',
-        ingredients: ['1 огурец', '2 помидора', '1 болгарский перец', '100 г сыра фета', 'маслины', 'оливковое масло'],
-        steps: ['Нарежьте овощи крупными кусками.', 'Добавьте сыр фета и маслины.', 'Заправьте оливковым маслом, посолите.']
-      },
-      {
-        id: 6,
-        title: 'Лазанья',
-        category: 'ужин',
-        time: 60,
-        difficulty: 'сложно',
-        tags: ['паста', 'мясо'],
-        rating: 4.6,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwERqrmw79Kom2PdcQgTEhBQAc_ielRNEkfcKLCgoPQA&s=10',
-        ingredients: ['500 г фарша', '9 листов лазаньи', '2 луковицы', 'чеснок', 'томатный соус', 'соус бешамель', 'сыр'],
-        steps: ['Обжарьте фарш с луком и чесноком, добавьте томатный соус.', 'Приготовьте соус бешамель.', 'Соберите лазанью: соус, листы, фарш, бешамель, сыр.', 'Запекайте 40 минут при 180°C.']
-      },
-      {
-        id: 7,
-        title: 'Тирамису',
-        category: 'десерт',
-        time: 40,
-        difficulty: 'средне',
-        tags: ['десерт', 'кофе'],
-        rating: 4.9,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4BVn2UFHzsfQiu8KTgiVptSGFrfrWXTAMiiWJUJJC6w&s=10',
-        ingredients: ['250 г маскарпоне', '3 яйца', '100 г сахара', 'савоярди', 'крепкий кофе', 'какао-порошок'],
-        steps: ['Взбейте желтки с сахаром, добавьте маскарпоне.', 'Взбейте белки в пену, аккуратно вмешайте.', 'Окуните савоярди в кофе и выложите слоями.', 'Посыпьте какао и охладите 3 часа.']
-      },
-      {
-        id: 8,
-        title: 'Овощное рагу',
-        category: 'диетическое',
-        time: 35,
-        difficulty: 'средне',
-        tags: ['диетическое', 'овощи'],
-        rating: 4.2,
-        img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUnJlVNECZoWWI57kX6IUQKSkoMN6DAIvvGjEE386c6A&s=10',
-        ingredients: ['1 кабачок', '1 баклажан', '2 помидора', '1 морковь', 'лук', 'чеснок', 'растительное масло'],
-        steps: ['Нарежьте все овощи кубиками.', 'Обжарьте лук и морковь, добавьте остальные овощи.', 'Тушите под крышкой 20 минут до готовности.', 'Посолите, добавьте чеснок.']
-      }
+      { id: 1, title: 'Омлет с овощами', category: 'завтрак', time: 15, difficulty: 'легко', tags: ['завтрак', 'овощи'], rating: 4.8, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrIHq_VIcNRSnkjCqONzQMqNijTMn0uS2NOo7hD1boaA&s=10', ingredients: ['3 яйца', '50 мл молока', '1 помидор', '1/2 болгарского перца', 'зелень', 'соль, перец'], steps: ['Взбейте яйца с молоком и щепоткой соли.', 'Нарежьте овощи кубиками.', 'Вылейте яичную смесь на разогретую сковороду с маслом.', 'Сверху выложите овощи и жарьте под крышкой 5-7 минут.', 'Подавайте с зеленью.'] },
+      { id: 2, title: 'Куриный суп с лапшой', category: 'обед', time: 45, difficulty: 'средне', tags: ['суп', 'курица'], rating: 4.5, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSVUidS19yJyyElTqd58Q_T-7feZM5aiDfw18jymcl_w&s=10', ingredients: ['500 г куриного филе', '2 л воды', '1 морковь', '1 луковица', '100 г лапши', 'зелень', 'соль, перец'], steps: ['Нарежьте курицу кубиками, залейте водой и варите 20 минут.', 'Добавьте нарезанные морковь и лук, варите ещё 10 минут.', 'Засыпьте лапшу и варите 5 минут.', 'Посолите, поперчите, добавьте зелень.'] },
+      { id: 3, title: 'Стейк с картофелем', category: 'ужин', time: 30, difficulty: 'сложно', tags: ['мясо', 'ужин'], rating: 4.9, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPGuKO8rcxTfh8mVPSP4HQBlDY0Bq2N3cKPeZrS9smpA&s=10', ingredients: ['2 стейка говядины', '4 картофелины', 'розмарин', 'чеснок', 'оливковое масло', 'соль, перец'], steps: ['Картофель нарежьте дольками, посыпьте солью и запекайте в духовке 20 минут.', 'Стейки обжарьте на сковороде с маслом по 3-4 минуты с каждой стороны.', 'Добавьте розмарин и чеснок для аромата.', 'Подавайте с картофелем.'] },
+      { id: 4, title: 'Панкейки с ягодами', category: 'завтрак', time: 20, difficulty: 'легко', tags: ['десерт', 'завтрак'], rating: 4.7, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJKLDG5D5y4zuqooSbScGw8bPnAb4j2EPnOHhCJyYtcQ&s=10', ingredients: ['200 г муки', '2 яйца', '200 мл молока', '1 ст.л. сахара', '1 ч.л. разрыхлителя', 'ягоды для подачи'], steps: ['Смешайте муку, сахар и разрыхлитель.', 'Взбейте яйца с молоком, добавьте к сухой смеси.', 'Жарьте на сухой сковороде до золотистого цвета.', 'Подавайте с ягодами и сиропом.'] },
+      { id: 5, title: 'Греческий салат', category: 'обед', time: 10, difficulty: 'легко', tags: ['салат', 'овощи'], rating: 4.3, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDdJN6-YNI94xCC7HoIw9SwS-0DbWAqzkwqXcXvbzi_Q&s=10', ingredients: ['1 огурец', '2 помидора', '1 болгарский перец', '100 г сыра фета', 'маслины', 'оливковое масло'], steps: ['Нарежьте овощи крупными кусками.', 'Добавьте сыр фета и маслины.', 'Заправьте оливковым маслом, посолите.'] },
+      { id: 6, title: 'Лазанья', category: 'ужин', time: 60, difficulty: 'сложно', tags: ['паста', 'мясо'], rating: 4.6, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwERqrmw79Kom2PdcQgTEhBQAc_ielRNEkfcKLCgoPQA&s=10', ingredients: ['500 г фарша', '9 листов лазаньи', '2 луковицы', 'чеснок', 'томатный соус', 'соус бешамель', 'сыр'], steps: ['Обжарьте фарш с луком и чесноком, добавьте томатный соус.', 'Приготовьте соус бешамель.', 'Соберите лазанью: соус, листы, фарш, бешамель, сыр.', 'Запекайте 40 минут при 180°C.'] },
+      { id: 7, title: 'Тирамису', category: 'десерт', time: 40, difficulty: 'средне', tags: ['десерт', 'кофе'], rating: 4.9, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ4BVn2UFHzsfQiu8KTgiVptSGFrfrWXTAMiiWJUJJC6w&s=10', ingredients: ['250 г маскарпоне', '3 яйца', '100 г сахара', 'савоярди', 'крепкий кофе', 'какао-порошок'], steps: ['Взбейте желтки с сахаром, добавьте маскарпоне.', 'Взбейте белки в пену, аккуратно вмешайте.', 'Окуните савоярди в кофе и выложите слоями.', 'Посыпьте какао и охладите 3 часа.'] },
+      { id: 8, title: 'Овощное рагу', category: 'диетическое', time: 35, difficulty: 'средне', tags: ['диетическое', 'овощи'], rating: 4.2, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUnJlVNECZoWWI57kX6IUQKSkoMN6DAIvvGjEE386c6A&s=10', ingredients: ['1 кабачок', '1 баклажан', '2 помидора', '1 морковь', 'лук', 'чеснок', 'растительное масло'], steps: ['Нарежьте все овощи кубиками.', 'Обжарьте лук и морковь, добавьте остальные овощи.', 'Тушите под крышкой 20 минут до готовности.', 'Посолите, добавьте чеснок.'] }
     ];
 
-    // ===== Состояние =====
     let currentFilter = 'all';
     let searchQuery = '';
     let favorites = JSON.parse(localStorage.getItem('tasty_favorites')) || [];
     let planner = JSON.parse(localStorage.getItem('tasty_planner')) || {};
+    let pendingRecipeId = null;
+    let isLoginMode = true;
 
-    // ===== DOM-ссылки =====
     const grid = document.getElementById('recipeGrid');
     const searchInput = document.getElementById('searchInput');
     const searchBtn = document.getElementById('searchBtn');
@@ -655,15 +708,37 @@
     const modalOverlay = document.getElementById('modalOverlay');
     const modalBody = document.getElementById('modalBody');
     const modalClose = document.getElementById('modalClose');
-
-    // Пикер дня
     const dayPickerOverlay = document.getElementById('dayPickerOverlay');
     const dayPickerClose = document.getElementById('dayPickerClose');
     const dayPickerRecipeName = document.getElementById('dayPickerRecipeName');
     const dayPickerButtons = document.getElementById('dayPickerButtons');
-    let pendingRecipeId = null;
+    const authOverlay = document.getElementById('authOverlay');
+    const authClose = document.getElementById('authClose');
+    const authTitle = document.getElementById('authTitle');
+    const authError = document.getElementById('authError');
+    const authName = document.getElementById('authName');
+    const authNameField = document.getElementById('authNameField');
+    const authPass = document.getElementById('authPass');
+    const authSubmit = document.getElementById('authSubmit');
+    const authToggleLink = document.getElementById('authToggleLink');
+    const authSwitch = document.getElementById('authSwitch');
+    const userBtn = document.getElementById('userBtn');
+    const userName = document.getElementById('userName');
+    const userIcon = document.getElementById('userIcon');
+    const bannerBtn = document.getElementById('bannerBtn');
 
-    // ===== Рендер карточек =====
+    function updateUserUI() {
+      if (currentUser) {
+        userName.textContent = currentUser.name;
+        userIcon.textContent = '👤';
+        userBtn.classList.add('btn-outline');
+      } else {
+        userName.textContent = 'Войти';
+        userIcon.textContent = '👤';
+        userBtn.classList.remove('btn-outline');
+      }
+    }
+
     function renderRecipes() {
       let filtered = recipes.filter(r => {
         const matchCategory = currentFilter === 'all' || r.category === currentFilter;
@@ -702,10 +777,10 @@
         `;
       }).join('');
 
-      // Обработчики событий для кнопок
       document.querySelectorAll('.btn-plan').forEach(btn => {
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
+          if (!currentUser) { openAuth(); return; }
           const id = parseInt(this.dataset.id);
           openDayPicker(id);
         });
@@ -713,6 +788,7 @@
       document.querySelectorAll('.btn-fav').forEach(btn => {
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
+          if (!currentUser) { openAuth(); return; }
           const id = parseInt(this.dataset.id);
           toggleFavorite(id);
         });
@@ -724,7 +800,6 @@
           openModal(id);
         });
       });
-      // Клик по изображению тоже открывает модалку
       document.querySelectorAll('.card-img').forEach(el => {
         el.addEventListener('click', function() {
           const id = parseInt(this.dataset.id);
@@ -733,7 +808,6 @@
       });
     }
 
-    // ===== Избранное =====
     function toggleFavorite(id) {
       const idx = favorites.indexOf(id);
       if (idx > -1) {
@@ -746,8 +820,8 @@
       renderPlanner();
     }
 
-    // ===== Планировщик =====
     function addToPlanner(id, day) {
+      if (!currentUser) { openAuth(); return; }
       if (!planner[day]) planner[day] = [];
       const recipe = recipes.find(r => r.id === id);
       if (!recipe) return;
@@ -795,10 +869,10 @@
       });
       plannerDays.innerHTML = html;
 
-      // Обработчики удаления
       document.querySelectorAll('.remove-meal').forEach(btn => {
         btn.addEventListener('click', function(e) {
           e.stopPropagation();
+          if (!currentUser) { openAuth(); return; }
           const day = this.dataset.day;
           const meal = this.dataset.meal;
           removeFromPlanner(day, meal);
@@ -806,7 +880,6 @@
       });
     }
 
-    // ===== Пикер дня =====
     function openDayPicker(recipeId) {
       const recipe = recipes.find(r => r.id === recipeId);
       if (!recipe) return;
@@ -819,7 +892,6 @@
       dayPickerOverlay.classList.add('open');
       document.body.classList.add('no-scroll');
 
-      // Обработчики для кнопок дней
       dayPickerButtons.querySelectorAll('button').forEach(btn => {
         btn.addEventListener('click', function() {
           const day = this.dataset.day;
@@ -835,16 +907,11 @@
       pendingRecipeId = null;
     }
 
-    // Закрытие пикера по клику на фон и на крестик
     dayPickerOverlay.addEventListener('click', function(e) {
       if (e.target === this) closeDayPicker();
     });
     dayPickerClose.addEventListener('click', closeDayPicker);
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape' && dayPickerOverlay.classList.contains('open')) closeDayPicker();
-    });
 
-    // ===== Модальное окно просмотра рецепта =====
     function openModal(id) {
       const recipe = recipes.find(r => r.id === id);
       if (!recipe) return;
@@ -880,16 +947,17 @@
       modalOverlay.classList.add('open');
       document.body.classList.add('no-scroll');
 
-      // Обработчики внутри модалки
       document.getElementById('modalPlanBtn').addEventListener('click', function() {
         const id = parseInt(this.dataset.id);
-        closeModal(); // закрываем модалку просмотра
-        openDayPicker(id); // открываем пикер
+        if (!currentUser) { closeModal(); openAuth(); return; }
+        closeModal();
+        openDayPicker(id);
       });
       document.getElementById('modalFavBtn').addEventListener('click', function() {
         const id = parseInt(this.dataset.id);
+        if (!currentUser) { openAuth(); return; }
         toggleFavorite(id);
-        openModal(id); // перерисовка
+        openModal(id);
       });
     }
 
@@ -898,16 +966,119 @@
       document.body.classList.remove('no-scroll');
     }
 
-    // Закрытие модалки просмотра по клику на фон
     modalOverlay.addEventListener('click', function(e) {
       if (e.target === this) closeModal();
     });
     modalClose.addEventListener('click', closeModal);
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape' && modalOverlay.classList.contains('open')) closeModal();
+      if (e.key === 'Escape' && dayPickerOverlay.classList.contains('open')) closeDayPicker();
+      if (e.key === 'Escape' && authOverlay.classList.contains('open')) closeAuth();
     });
 
-    // ===== Toast-уведомления =====
+    function openAuth(mode) {
+      if (mode === 'register') {
+        isLoginMode = false;
+        authTitle.textContent = 'Регистрация';
+        authSubmit.textContent = 'Зарегистрироваться';
+        authSwitch.innerHTML = `Уже есть аккаунт? <a id="authToggleLink">Войти</a>`;
+        authNameField.style.display = 'block';
+      } else {
+        isLoginMode = true;
+        authTitle.textContent = 'Вход';
+        authSubmit.textContent = 'Войти';
+        authSwitch.innerHTML = `Нет аккаунта? <a id="authToggleLink">Зарегистрироваться</a>`;
+        authNameField.style.display = 'block';
+      }
+      authError.textContent = '';
+      authName.value = '';
+      authPass.value = '';
+      authOverlay.classList.add('open');
+      document.body.classList.add('no-scroll');
+      document.getElementById('authToggleLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        openAuth(isLoginMode ? 'register' : 'login');
+      });
+    }
+
+    function closeAuth() {
+      authOverlay.classList.remove('open');
+      document.body.classList.remove('no-scroll');
+    }
+
+    authOverlay.addEventListener('click', function(e) {
+      if (e.target === this) closeAuth();
+    });
+    authClose.addEventListener('click', closeAuth);
+
+    function handleAuth() {
+      const name = authName.value.trim();
+      const pass = authPass.value.trim();
+      authError.textContent = '';
+
+      if (!name || !pass) {
+        authError.textContent = 'Заполните все поля.';
+        return;
+      }
+
+      if (isLoginMode) {
+        const user = users.find(u => u.name === name && u.pass === pass);
+        if (user) {
+          currentUser = { name: user.name };
+          localStorage.setItem('tasty_user', JSON.stringify(currentUser));
+          updateUserUI();
+          closeAuth();
+          showToast(`👋 Добро пожаловать, ${user.name}!`);
+          renderRecipes();
+          renderPlanner();
+        } else {
+          authError.textContent = 'Неверное имя или пароль.';
+        }
+      } else {
+        if (users.find(u => u.name === name)) {
+          authError.textContent = 'Пользователь с таким именем уже существует.';
+          return;
+        }
+        users.push({ name, pass });
+        localStorage.setItem('tasty_users', JSON.stringify(users));
+        currentUser = { name };
+        localStorage.setItem('tasty_user', JSON.stringify(currentUser));
+        updateUserUI();
+        closeAuth();
+        showToast(`🎉 Добро пожаловать, ${name}!`);
+        renderRecipes();
+        renderPlanner();
+      }
+    }
+
+    authSubmit.addEventListener('click', handleAuth);
+    authPass.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') handleAuth();
+    });
+
+    userBtn.addEventListener('click', function() {
+      if (currentUser) {
+        if (confirm(`Выйти из аккаунта "${currentUser.name}"?`)) {
+          currentUser = null;
+          localStorage.removeItem('tasty_user');
+          updateUserUI();
+          showToast('👋 Вы вышли из аккаунта.');
+          renderRecipes();
+          renderPlanner();
+        }
+      } else {
+        openAuth('login');
+      }
+    });
+
+    bannerBtn.addEventListener('click', function() {
+      if (!currentUser) {
+        openAuth('register');
+      } else {
+        showToast('🍳 Вы уже с нами! Добавляйте рецепты в план.');
+      }
+    });
+
     function showToast(message) {
       const toast = document.createElement('div');
       toast.style.cssText = `
@@ -931,7 +1102,6 @@
       }, 3000);
     }
 
-    // ===== Фильтры =====
     filterBtns.forEach(btn => {
       btn.addEventListener('click', function() {
         filterBtns.forEach(b => b.classList.remove('active'));
@@ -941,7 +1111,6 @@
       });
     });
 
-    // ===== Поиск =====
     function performSearch() {
       searchQuery = searchInput.value.trim();
       renderRecipes();
@@ -951,7 +1120,6 @@
       if (e.key === 'Enter') performSearch();
     });
 
-    // ===== Тёмная тема =====
     let darkTheme = localStorage.getItem('tasty_theme') === 'dark';
     function applyTheme() {
       document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light');
@@ -964,7 +1132,7 @@
     });
     applyTheme();
 
-    // ===== Инициализация =====
+    updateUserUI();
     renderRecipes();
     renderPlanner();
   })();
